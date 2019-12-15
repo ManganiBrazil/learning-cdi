@@ -21,9 +21,14 @@ import javax.ws.rs.core.Response;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class SalaryResource {
 
-    @Inject
-    @Named("taxCalculator")
+
     private TaxCalculatorService taxCalculator;
+
+    @Inject
+    public void init(@Named("taxCalculator") TaxCalculatorService taxCalculator) {
+        this.taxCalculator = taxCalculator;
+    }
+
 
     @POST
     public Response calculateIncomeTax(EmployeeRequest employee) {

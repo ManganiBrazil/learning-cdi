@@ -17,8 +17,13 @@ import java.math.BigDecimal;
 @Named("taxCalculator")
 public class TaxCalculatorServiceImpl implements TaxCalculatorService, Serializable {
 
-    @Inject
     private SalaryCalculatorService salaryCalculator;
+
+    @Inject
+    public void init(@Named("salaryCalculator") SalaryCalculatorService salaryCalculator) {
+        this.salaryCalculator = salaryCalculator;
+    }
+
 
     @Override
     public IncomeRateResponse calculateIncomeTax(EmployeeRequest employee) {
