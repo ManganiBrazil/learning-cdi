@@ -8,6 +8,7 @@ import javax.annotation.PostConstruct;
 import javax.enterprise.context.ApplicationScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.validation.Valid;
 import javax.ws.rs.Consumes;
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -21,7 +22,6 @@ import javax.ws.rs.core.Response;
 @Produces({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
 public class SalaryResource {
 
-
     private TaxCalculatorService taxCalculator;
 
     @Inject
@@ -31,7 +31,7 @@ public class SalaryResource {
 
 
     @POST
-    public Response calculateIncomeTax(EmployeeRequest employee) {
+    public Response calculateIncomeTax(@Valid EmployeeRequest employee) {
 
         IncomeRateResponse incomeRate = this.taxCalculator.calculateIncomeTax(employee);
 

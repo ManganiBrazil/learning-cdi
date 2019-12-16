@@ -12,6 +12,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.List;
 
 @Path("/employees")
 @Consumes({MediaType.APPLICATION_JSON, MediaType.APPLICATION_XML})
@@ -22,17 +24,27 @@ public class EmployeeResource {
     @GET
     public Response getEmployees() {
 
-        EmployeeRequest employee = new EmployeeRequest();
+        List<EmployeeRequest> employees = new ArrayList<>();
 
-        employee.setPost(new PostRequest());
-        employee.getPost().setBaseSalary(BigDecimal.valueOf(17000));
-        employee.getPost().setGraduation(GraduationType.DOCTORATE);
+        employees.add(new EmployeeRequest());
+        employees.add(new EmployeeRequest());
 
-        employee.setGraduation(GraduationType.SPECIALIST);
-        employee.setHiredIn(Short.valueOf("2019"));
-        employee.setName("Paulo Sérgio Bruno");
+        employees.get(0).setPost(new PostRequest());
+        employees.get(0).getPost().setBaseSalary(BigDecimal.valueOf(17000));
+        employees.get(0).getPost().setGraduation(GraduationType.SPECIALIST);
 
-        return Response.ok().entity(employee).build();
+        employees.get(0).setGraduation(GraduationType.DOCTORATE);
+        employees.get(0).setHiredIn(Short.valueOf("2019"));
+        employees.get(0).setName("Paulo Sérgio Bruno");
+
+        employees.get(1).setPost(new PostRequest());
+        employees.get(1).getPost().setBaseSalary(BigDecimal.valueOf(10000));
+        employees.get(1).getPost().setGraduation(GraduationType.MEDIUM);
+
+        employees.get(1).setGraduation(GraduationType.SPECIALIST);
+        employees.get(1).setHiredIn(Short.valueOf("2018"));
+        employees.get(1).setName("Rosemeire Peixinho Dourado");
+
+        return Response.ok().entity(employees).build();
     }
-
 }
